@@ -37,6 +37,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packagingOptions{
+        exclude("META-INF/DEPENDENCIES")
+    }
 }
 
 dependencies {
@@ -60,6 +63,11 @@ dependencies {
 
     implementation("com.github.prabhat1707:EasyWayLocation:2.4")
     implementation("com.github.imperiumlabs:GeoFirestore-Android:v1.4.0")
+
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.karumi:dexter:6.2.3")
+    implementation("com.google.auth:google-auth-library-oauth2-http:1.19.0")
     implementation(libs.firebase.messaging.ktx)
 
     // Asistente

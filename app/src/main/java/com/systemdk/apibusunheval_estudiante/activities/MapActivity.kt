@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -33,6 +34,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.messaging.FirebaseMessaging
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import com.systemdk.apibusunheval_estudiante.R
 import com.systemdk.apibusunheval_estudiante.databinding.ActivityMapBinding
 import com.systemdk.apibusunheval_estudiante.fragments.ModalBottonSheetMenu
@@ -91,6 +99,30 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, Listener {
 
         //Llamar al menu
         binding.imageViewMenu.setOnClickListener { showModalMenu() }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Dexter.withContext(applicationContext)
+                .withPermission(Manifest.permission.POST_NOTIFICATIONS)
+                .withListener(object: PermissionListener {
+                    override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+                    }
+
+                    override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                        p0: PermissionRequest?,
+                        p1: PermissionToken?
+                    ) {
+                        p1?.continuePermissionRequest()
+                    }
+                }).check()
+        }
+
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+
+        FirebaseMessaging.getInstance().subscribeToTopic("test")
     }
 
     val locationPermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permission ->
