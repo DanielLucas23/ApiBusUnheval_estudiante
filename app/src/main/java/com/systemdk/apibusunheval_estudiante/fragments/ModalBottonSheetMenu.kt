@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.systemdk.apibusunheval_estudiante.R
+import com.systemdk.apibusunheval_estudiante.activities.ARActivity
 import com.systemdk.apibusunheval_estudiante.activities.AsistenteActivity
 import com.systemdk.apibusunheval_estudiante.activities.MainActivity
 import com.systemdk.apibusunheval_estudiante.models.Estudiante
@@ -57,8 +58,8 @@ class ModalBottonSheetMenu: BottomSheetDialogFragment() {
     }
 
     private fun goToConsultasAr(){
-//        val i = Intent(activity, ARActivity::class.java)
-//        startActivity(i)
+        val i = Intent(activity, ARActivity::class.java)
+        startActivity(i)
     }
 
     private fun getEstudiante(){

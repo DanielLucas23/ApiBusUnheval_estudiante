@@ -29,8 +29,7 @@ import com.google.ar.sceneform.rendering.ExternalTexture;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.systemdk.apibusunheval_estudiante.R;
-
-
+import com.systemdk.apibusunheval_estudiante.fragments.CustomArFragment;
 
 
 import java.util.Collection;
@@ -60,9 +59,8 @@ public class ARActivity extends AppCompatActivity {
 
         texture = new ExternalTexture();
 
-        arFragment = (com.systemdk.apibusunheval_estudiante.fragments.CustomArFragment)
+        arFragment = (CustomArFragment)
                 getSupportFragmentManager().findFragmentById(R.id.arFragment);
-
 
         scene = arFragment.getArSceneView().getScene();
         scene.addOnUpdateListener(this::onUpdate);
