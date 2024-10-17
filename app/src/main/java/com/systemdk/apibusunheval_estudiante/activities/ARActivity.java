@@ -1,20 +1,21 @@
 package com.systemdk.apibusunheval_estudiante.activities;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import android.widget.Button;
-import android.animation.Animator;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.AugmentedImage;
 import com.google.ar.core.Frame;
@@ -29,13 +30,13 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.systemdk.apibusunheval_estudiante.R;
 
-import java.util.ArrayList;
+
+
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import com.airbnb.lottie.LottieAnimationView;
-
 
 
 public class ARActivity extends AppCompatActivity {
@@ -66,14 +67,16 @@ public class ARActivity extends AppCompatActivity {
         scene = arFragment.getArSceneView().getScene();
         scene.addOnUpdateListener(this::onUpdate);
 
-        ModelRenderable.builder()
-                .setSource(this, R.raw.video_screen)
-                .build()
-                .thenAccept(modelRenderable -> {
-                    modelRenderable.getMaterial().setExternalTexture("videoTexture", texture);
-                    modelRenderable.getMaterial().setFloat4("keyColor", new Color(0.01843f, 1f, 0.098f));
-                    renderable = modelRenderable;
-                });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            ModelRenderable.builder()
+                    .setSource(this, R.raw.video_screen)
+                    .build()
+                    .thenAccept(modelRenderable -> {
+                        modelRenderable.getMaterial().setExternalTexture("videoTexture", texture);
+                        modelRenderable.getMaterial().setFloat4("keyColor", new Color(0.01843f, 1f, 0.098f));
+                        renderable = modelRenderable;
+                    });
+        }
 
         // Inicializar el LottieAnimationView y cargar la animación desde el directorio raw
         animationView = findViewById(R.id.lottie_animation_view);
