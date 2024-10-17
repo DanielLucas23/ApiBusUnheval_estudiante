@@ -76,4 +76,18 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    // Otras dependencias necesarias para tu proyecto ar
+
+
+
+
+    implementation ("com.karumi:dexter:5.0.0")
+    implementation ("androidx.appcompat:appcompat:1.0.2")
+
+    implementation ("com.airbnb.android:lottie:3.7.0")
+    implementation ("com.google.ar:core:1.30.0")
+    implementation ("com.google.ar.sceneform.ux:sceneform-ux:1.17.1")
+    implementation ("com.google.ar.sceneform:assets:1.17.1")
+
+
 }
